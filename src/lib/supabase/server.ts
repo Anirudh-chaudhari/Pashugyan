@@ -1,32 +1,31 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { hasSupabaseEnv } from "@/lib/supabase/client";
+import {
+  getSupabasePublishableKey,
+  getSupabaseUrl,
+  hasSupabaseEnv,
+} from "@/lib/supabase/client";
 
-export function createSupabaseServerClient() {
+export async function createSupabaseServerClient() {
   if (!hasSupabaseEnv()) {
     return null;
   }
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    getSupabaseUrl()!,
+    getSupabasePublishableKey()!,
     {
       cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value;
+        getAll() {
+          return cookieStore.getAll();
         },
-        set(name: string, value: string, options: Record<string, unknown>) {
+        setAll(cookiesToSet) {
           try {
-            cookieStore.set({ name, value, ...options });
-          } catch {
-            return;
-          }
-        },
-        remove(name: string, options: Record<string, unknown>) {
-          try {
-            cookieStore.set({ name, value: "", ...options });
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options),
+            );
           } catch {
             return;
           }

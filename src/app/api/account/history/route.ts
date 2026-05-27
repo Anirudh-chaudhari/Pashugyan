@@ -9,7 +9,7 @@ import {
 } from "@/lib/supabase/profile";
 
 async function getAuthenticatedUser() {
-  const supabase = createSupabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   if (!supabase) {
     return {

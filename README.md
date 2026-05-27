@@ -53,8 +53,11 @@ npm run start -- --hostname 0.0.0.0 --port 3000
 
 `NEXT_PUBLIC_SUPABASE_URL`
 `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+`NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 - Optional. Enables Supabase-backed features where configured.
+- The app accepts either `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` or the older
+  `NEXT_PUBLIC_SUPABASE_ANON_KEY` name for Vercel and legacy setups.
 
 ## Quality checks
 
