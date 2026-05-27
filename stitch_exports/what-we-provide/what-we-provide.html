@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>What We Provide - PashuGyan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(224, 224, 224, 0.5);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#005312",
+                        "surface-container-low": "#f5f3f3",
+                        "surface": "#fbf9f8",
+                        "on-tertiary-fixed-variant": "#00468c",
+                        "on-tertiary-container": "#edf1ff",
+                        "surface-container-highest": "#e4e2e1",
+                        "tertiary-fixed-dim": "#a9c7ff",
+                        "tertiary-container": "#246dc8",
+                        "on-primary-fixed": "#002204",
+                        "primary-fixed": "#a3f69c",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#1b6d24",
+                        "secondary-container": "#ff8f00",
+                        "primary": "#0d631b",
+                        "surface-variant": "#e4e2e1",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fbf9f8",
+                        "outline-variant": "#bfcaba",
+                        "on-surface": "#1b1c1c",
+                        "primary-fixed-dim": "#88d982",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "secondary": "#8f4e00",
+                        "surface-container": "#f0eded",
+                        "on-secondary-container": "#623400",
+                        "inverse-primary": "#88d982",
+                        "secondary-fixed-dim": "#ffb77a",
+                        "on-primary-container": "#cbffc2",
+                        "on-error": "#ffffff",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#6d3a00",
+                        "background": "#fbf9f8",
+                        "primary-container": "#2e7d32",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#001b3d",
+                        "inverse-surface": "#303030",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f2f0f0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "container-margin-mobile": "16px",
+                        "container-margin-desktop": "32px",
+                        "stack-lg": "24px",
+                        "unit": "8px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopNavBar Navigation Shell -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter md:px-container-margin-desktop py-4 bg-surface dark:bg-on-surface shadow-sm">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">PashuGyan</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Detect</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Database</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">How It Works</a>
+<a class="font-label-lg text-label-lg font-medium text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1" href="#">What We Provide</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Help</a>
+</nav>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-lg text-label-lg font-bold hover:opacity-90 transition-all active:scale-95">
+            Try Now
+        </button>
+</header>
+<main class="pt-24 pb-12 px-container-margin-mobile md:px-container-margin-desktop max-w-7xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-16 text-center md:text-left">
+<h1 class="font-display-lg text-display-lg text-primary mb-4 leading-tight">Empowering Indian Farmers<br/>with Precision AI</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                PashuGyan provides a comprehensive suite of digital tools designed to modernize livestock management, ensuring better health for your animals and higher profits for your farm.
+            </p>
+</section>
+<!-- Main Features Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+<!-- Feature 1: Instant Breed Identification (Large Block) -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low shadow-sm hover:shadow-lg transition-all border border-outline-variant/30 h-[450px]">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A high-resolution photograph of a healthy Gir cow standing in a sun-drenched Indian pasture during the golden hour. The lighting is soft and warm, highlighting the animal's distinct breed characteristics. The overall aesthetic is professional and clean, using a natural color palette of greens and earthy tones to evoke trust and agricultural expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChD5XRG00KgUKTxFlEib2BuArrDGkCy_gHdmziSq4v3zJ3T2-eBsDNwXl6S3efRatpi8Dnn9T4JxSFbkEWPm86lxPTkUgt1w37RpeN7ZjkvfnwSWgsXw2U8g3xd8zkizvc4UsGOnJs8VLdqlBm0VrszriGcj8kNM9rZgzNxo-sVegD0FQeH0SIbj1jNKaCrveSqBZdY0ckt132jNrKgV4lIVh41PwlXNBbyOGa4-WTecexHUZ6fyRl8agWaNyu0GqXf00OPQTEbfB5"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+</div>
+<div class="absolute bottom-0 p-8 z-10">
+<div class="inline-flex items-center gap-2 bg-primary-container text-on-primary-container px-3 py-1 rounded-full mb-4">
+<span class="material-symbols-outlined text-[18px]">camera_enhance</span>
+<span class="font-label-sm text-label-sm">AI POWERED</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-white mb-2">Instant Breed Identification</h2>
+<p class="font-body-md text-body-md text-white/90 max-w-lg">
+                        Identify indigenous and exotic breeds in seconds. Our AI achieves 98%+ accuracy by analyzing physical traits, helping you confirm pedigree and market value instantly.
+                    </p>
+</div>
+</div>
+<!-- Feature 2: Detailed Health Plans (Tall Block) -->
+<div class="md:col-span-4 rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/50 p-8 flex flex-col justify-between">
+<div>
+<div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4">Health &amp; Care Plans</h2>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Customized vaccination schedules based on age and region.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Nutrition guides for maximum growth and immunity.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Early-warning symptom detection through image analysis.</span>
+</li>
+</ul>
+</div>
+<button class="w-full mt-8 border border-primary text-primary py-3 rounded-lg font-label-lg text-label-lg hover:bg-primary/5 transition-colors">
+                    View Sample Plan
+                </button>
+</div>
+<!-- Feature 3: Market Value Estimates -->
+<div class="md:col-span-5 rounded-xl bg-surface-container shadow-sm border border-outline-variant/30 p-8 overflow-hidden relative">
+<div class="relative z-10">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Market Value Estimates</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                        Real-time pricing data from Mandis and private auctions across India to help you negotiate the best price for your livestock.
+                    </p>
+<div class="bg-white/60 p-4 rounded-lg border border-white/80">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Estimated Value</span>
+<span class="text-secondary font-bold">↑ 4% this month</span>
+</div>
+<div class="text-3xl font-bold text-on-surface">₹75,000 - ₹82,500</div>
+</div>
+</div>
+<div class="absolute -right-12 -bottom-12 opacity-10">
+<span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+</div>
+<!-- Feature 4: Milk Yield Projections -->
+<div class="md:col-span-7 rounded-xl bg-primary-container text-on-primary-container p-8 relative overflow-hidden flex flex-col md:flex-row gap-8 items-center">
+<div class="flex-1">
+<h2 class="font-headline-md text-headline-md mb-2">Milk Yield Projections</h2>
+<p class="font-body-md text-body-md opacity-90 mb-6">
+                        Leverage biological data and historical trends to predict daily and seasonal milk production levels. Plan your distribution and sales with precision.
+                    </p>
+<div class="flex gap-4">
+<div class="bg-on-primary-container/20 px-4 py-2 rounded-lg">
+<div class="text-xs uppercase opacity-70">Peak Yield</div>
+<div class="text-xl font-bold">18L/Day</div>
+</div>
+<div class="bg-on-primary-container/20 px-4 py-2 rounded-lg">
+<div class="text-xs uppercase opacity-70">Lactation Period</div>
+<div class="text-xl font-bold">305 Days</div>
+</div>
+</div>
+</div>
+<div class="flex-1 w-full h-48 md:h-full bg-white/10 rounded-lg p-4 flex items-center justify-center">
+<img class="w-full h-full object-cover rounded-lg" data-alt="A clean, minimalist 3D rendering of a milk container next to a digital graph showing upward trends. The color palette is composed of soft whites, forest greens, and amber accents. The lighting is crisp and bright, conveying a sense of hygiene, precision data analysis, and modern agricultural technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAau8C9G2YExl-yGzeu2qjdN9U_hQpxk7P5AHW6a3NBZcCsRRS2hTyEfZ8Z7tW0fKNkQhFHeVzLtNpc_d5SSlJm9rh5kuUZQhI22oanr4CWTUDuQvuMl9sCo11VTxS3ciHT6MMAQztCAdpikBKYDfbo7qWbP-UApwhy5vVPAe9QC8CQ69dVwE7FF_xXWaomMB-Q1segtDY9uUzxp54bF4zmrazEuKjWEYHzx9b_ncFi7t5TwcCfYlb7lJ3HtGSJwkwz3faVHWwLWUeB"/>
+</div>
+</div>
+</div>
+<!-- Trust Signals / Why Us -->
+<section class="bg-surface-container-high rounded-2xl p-8 md:p-12 mb-16">
+<div class="text-center mb-12">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Built for the Indian Heartlands</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Our technology is tested in diverse climatic conditions and local environments.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="text-center p-4">
+<span class="material-symbols-outlined text-secondary text-[40px] mb-4">language</span>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-2">Multi-lingual Support</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Available in Hindi, Punjabi, Marathi, Tamil, and more for ease of use.</p>
+</div>
+<div class="text-center p-4">
+<span class="material-symbols-outlined text-secondary text-[40px] mb-4">signal_wifi_off</span>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-2">Offline Capability</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Critical identification features work even without a stable internet connection.</p>
+</div>
+<div class="text-center p-4">
+<span class="material-symbols-outlined text-secondary text-[40px] mb-4">verified_user</span>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-2">Expert Verified</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Insights are calibrated by veterinary professionals and dairy experts.</p>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="text-center py-12">
+<h2 class="font-headline-lg text-headline-lg mb-6">Ready to transform your farm?</h2>
+<div class="flex flex-col md:flex-row justify-center gap-4">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-lg text-label-lg font-bold shadow-lg hover:translate-y-[-2px] transition-all">
+                    Start a Free Scan
+                </button>
+<button class="bg-white border-2 border-primary text-primary px-10 py-4 rounded-full font-label-lg text-label-lg font-bold hover:bg-primary/5 transition-all">
+                    Contact an Expert
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer Navigation Shell -->
+<footer class="w-full py-stack-lg px-gutter md:px-container-margin-desktop flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md bg-surface-container-highest dark:bg-inverse-surface mt-12">
+<div class="flex flex-col gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">PashuGyan</span>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant max-w-sm">
+                © 2024 PashuGyan. Supporting Indian Agriculture with AI-driven precision.
+            </p>
+</div>
+<div class="flex flex-wrap gap-x-8 gap-y-4">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Contact Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all" href="#">About Us</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions for hovering bento cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0px)';
+            });
+        });
+
+        // Simple active state simulation for nav
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => {
+                    l.classList.remove('text-primary', 'dark:text-primary-fixed-dim', 'border-b-2', 'border-primary', 'dark:border-primary-fixed-dim', 'pb-1');
+                    l.classList.add('text-on-surface-variant', 'dark:text-outline-variant');
+                });
+                link.classList.remove('text-on-surface-variant', 'dark:text-outline-variant');
+                link.classList.add('text-primary', 'dark:text-primary-fixed-dim', 'border-b-2', 'border-primary', 'dark:border-primary-fixed-dim', 'pb-1');
+            });
+        });
+    </script>
+</body></html>

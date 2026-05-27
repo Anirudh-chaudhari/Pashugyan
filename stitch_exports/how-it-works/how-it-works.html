@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How It Works - PashuGyan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-connector {
+            position: relative;
+        }
+        @media (min-width: 768px) {
+            .step-connector::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 100%;
+                width: 100%;
+                height: 2px;
+                background: repeating-linear-gradient(to right, #bfcaba 0, #bfcaba 4px, transparent 4px, transparent 8px);
+                z-index: 0;
+            }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(224, 224, 224, 1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#005312",
+                      "surface-container-low": "#f5f3f3",
+                      "surface": "#fbf9f8",
+                      "on-tertiary-fixed-variant": "#00468c",
+                      "on-tertiary-container": "#edf1ff",
+                      "surface-container-highest": "#e4e2e1",
+                      "tertiary-fixed-dim": "#a9c7ff",
+                      "tertiary-container": "#246dc8",
+                      "on-primary-fixed": "#002204",
+                      "primary-fixed": "#a3f69c",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#1b6d24",
+                      "secondary-container": "#ff8f00",
+                      "primary": "#0d631b",
+                      "surface-variant": "#e4e2e1",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#fbf9f8",
+                      "outline-variant": "#bfcaba",
+                      "on-surface": "#1b1c1c",
+                      "primary-fixed-dim": "#88d982",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#eae8e7",
+                      "secondary": "#8f4e00",
+                      "surface-container": "#f0eded",
+                      "on-secondary-container": "#623400",
+                      "inverse-primary": "#88d982",
+                      "secondary-fixed-dim": "#ffb77a",
+                      "on-primary-container": "#cbffc2",
+                      "on-error": "#ffffff",
+                      "on-background": "#1b1c1c",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#6d3a00",
+                      "background": "#fbf9f8",
+                      "primary-container": "#2e7d32",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#001b3d",
+                      "inverse-surface": "#303030",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f2f0f0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "gutter": "16px",
+                      "container-margin-mobile": "16px",
+                      "container-margin-desktop": "32px",
+                      "stack-lg": "24px",
+                      "unit": "8px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "label-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter md:px-container-margin-desktop py-4 bg-surface dark:bg-on-surface shadow-sm">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">PashuGyan</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">Detect</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">Database</a>
+<a class="font-label-lg text-label-lg font-medium text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-1" href="#">How It Works</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">What We Provide</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">Help</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-lg font-bold Active:opacity-80 transition-all duration-200">Try Now</button>
+</nav>
+<main class="pt-24 pb-12">
+<!-- Hero Section -->
+<section class="px-gutter md:px-container-margin-desktop py-12 text-center">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-4">Science Behind the Shield</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Bridging Indian agricultural tradition with state-of-the-art Deep Learning to provide instant, expert animal health and breed analysis in the palm of your hand.
+            </p>
+</section>
+<!-- 3-Step Process (Bento-style layout) -->
+<section class="px-gutter md:px-container-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-stack-lg items-stretch">
+<!-- Step 1 -->
+<div class="flex flex-col p-8 rounded-xl bg-surface-container-low border border-outline-variant hover:shadow-lg transition-shadow duration-300">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-primary-fixed text-4xl" data-icon="photo_camera">photo_camera</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">1. Snap a Photo</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Simply point your phone's camera at the animal. No specialized equipment needed. Our interface is designed to work even in low-light field conditions.
+                </p>
+<div class="mt-8 overflow-hidden rounded-lg aspect-square">
+<img class="w-full h-full object-cover" data-alt="A close-up shot of a farmer's hand holding a modern smartphone to take a high-resolution photo of a healthy Gir cow in a sun-drenched Indian pasture. The lighting is golden and warm, emphasizing the trust between the farmer and technology. The overall aesthetic is professional, clean, and optimistic, using a natural color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFoKRXtmXhJxZFWFDOfaHclNgbu1ZhELqY8UjgFbrld-t9Kka-_OfDRl0C5K4Ryv3405xYzxQaH89J84oioMtkKiilfWaWTInntDnjB3A8wrnzA19YOLcj8Pxps3TwFCG8xJ5dK4VTIfja6PbBSKILrf3_yfhST7wUZ4lOnDGlrZ6jWNekPCt0gL6CqL-XpuBLvFoLuD-XA5M4qFdja4J26nqpdm60efbpD3zjejE-cdxisDG4l6sfVy_h-_UyPxW7bfHkhRBsdnNu"/>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col p-8 rounded-xl bg-surface-container-low border border-outline-variant hover:shadow-lg transition-shadow duration-300">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-primary-fixed text-4xl" data-icon="neurology">neurology</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">2. AI Analysis</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Our Deep Learning models process your image in real-time, scanning thousands of visual markers to identify specific breeds and health indicators unique to Indian livestock.
+                </p>
+<div class="mt-8 flex flex-col gap-4">
+<div class="bg-white p-4 rounded-lg shadow-sm border border-outline-variant">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-lg text-label-lg text-on-surface">Convolutional Neural Network</span>
+<span class="font-label-sm text-label-sm text-primary">Active</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary animate-[pulse_2s_infinite]" style="width: 85%"></div>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg shadow-sm border border-outline-variant">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-lg text-label-lg text-on-surface">Pattern Matching</span>
+<span class="font-label-sm text-label-sm text-primary">Active</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary animate-[pulse_2.5s_infinite]" style="width: 92%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col p-8 rounded-xl bg-surface-container-low border border-outline-variant hover:shadow-lg transition-shadow duration-300">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-primary-fixed text-4xl" data-icon="task_alt">task_alt</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">3. Get Result</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Receive a comprehensive report with high confidence scores, detailed breed history, and recommended next steps for care or commerce.
+                </p>
+<div class="mt-8 glass-card p-6 rounded-xl relative">
+<div class="absolute top-4 right-4 bg-primary text-on-primary font-label-lg px-3 py-1 rounded-full shadow-md">
+                        98.4% Confidence
+                    </div>
+<h4 class="font-title-lg text-title-lg text-on-surface mt-4">Sahiwal Cattle</h4>
+<p class="font-label-sm text-label-sm text-secondary-container font-bold mb-4 uppercase tracking-wider">Premium Breed</p>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> 
+                            Origin: Punjab/Rajasthan
+                        </li>
+<li class="flex items-center gap-2 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span> 
+                            High Milk Productivity
+                        </li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Accuracy Metrics Section -->
+<section class="mt-24 px-gutter md:px-container-margin-desktop py-16 bg-primary-container rounded-3xl mx-gutter md:mx-container-margin-desktop text-on-primary-container">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-6">Unmatched Precision</h2>
+<p class="font-body-lg text-body-lg opacity-90 mb-8">
+                        Our model is trained on a proprietary dataset of over 2 million verified images of Indian livestock, ensuring accuracy that rivals veteran veterinary experts.
+                    </p>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<div class="text-4xl font-bold mb-1">95.8%</div>
+<div class="font-label-lg opacity-80 uppercase tracking-widest">Model Accuracy</div>
+</div>
+<div>
+<div class="text-4xl font-bold mb-1">&lt; 2s</div>
+<div class="font-label-lg opacity-80 uppercase tracking-widest">Inference Speed</div>
+</div>
+</div>
+</div>
+<div class="relative h-64 md:h-full min-h-[300px] rounded-2xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A professional scientific visualization of complex data points and neural network nodes connecting across a dark, agricultural-themed backdrop. Subtle green glow effects highlight the nodes, symbolizing high-precision AI technology. The lighting is low-key and high-tech, evoking a sense of deep learning and industrial reliability for the PashuGyan platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUqebQXkqA8Dc9WQNH-ZW3BHz4xRMcsP5GLSbbB4ssd17F-J9YHyuf4QY42j4ZdClX1cL4_kW_9l3gTksDgyXEfD9mrCNEjux0Th9ZHf8LGu6Uj8_IqLAgVlsjCCD3ijwSCQ12Y1NzawAOHEaWW_sm22OnpyAn06g_BMW--0324pAWwWB9kavO-UoTcaysSaHkN-z1Ow3r-niKobPuEZdL5n74SlWE6qv-RonPPxJvhGwqBt3BQuCex6jkadGRKcv938mRWCTrz3Z1"/>
+</div>
+</div>
+</section>
+<!-- Privacy & Security -->
+<section class="mt-24 px-gutter md:px-container-margin-desktop text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Your Data, Your Control</h2>
+<div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 text-left">
+<div class="p-8 border border-outline-variant rounded-xl flex gap-6">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="shield_lock">shield_lock</span>
+<div>
+<h4 class="font-title-lg text-title-lg mb-2">End-to-End Encryption</h4>
+<p class="font-body-md text-on-surface-variant">All photos and farm data are encrypted. We never share your personal information with third parties without your explicit consent.</p>
+</div>
+</div>
+<div class="p-8 border border-outline-variant rounded-xl flex gap-6">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="cloud_off">cloud_off</span>
+<div>
+<h4 class="font-title-lg text-title-lg mb-2">Edge Processing</h4>
+<p class="font-body-md text-on-surface-variant">Where possible, our AI runs locally on your device to minimize data transmission and ensure lightning-fast results even with poor internet.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="mt-24 px-gutter md:px-container-margin-desktop py-20 text-center bg-surface-container-high rounded-t-[4rem]">
+<h2 class="font-display-lg text-display-lg mb-6">Ready to see it in action?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto mb-10">
+                Join 50,000+ Indian farmers who are using PashuGyan to optimize their livestock health and profitability.
+            </p>
+<div class="flex flex-col md:flex-row gap-4 justify-center">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-lg font-bold shadow-xl hover:scale-105 transition-transform duration-200">Start Free Scan</button>
+<button class="border-2 border-primary text-primary px-10 py-4 rounded-full font-label-lg font-bold hover:bg-primary hover:text-on-primary transition-all duration-200">Watch Demo</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-gutter md:px-container-margin-desktop flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md bg-surface-container-highest dark:bg-inverse-surface mt-12">
+<div class="flex flex-col gap-2">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">PashuGyan</div>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant">© 2024 PashuGyan. Supporting Indian Agriculture with AI-driven precision.</p>
+</div>
+<div class="flex flex-wrap gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary underline transition-all Active:scale-95" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary underline transition-all Active:scale-95" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary underline transition-all Active:scale-95" href="#">Contact Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary underline transition-all Active:scale-95" href="#">About Us</a>
+</div>
+</footer>
+<!-- FAB (Suppressed on this info-heavy page as per relevance check, but keeping placeholder logic if needed) -->
+<!-- Suppressed: Primary action is to learn. The 'Try Now' buttons in sections handle the transition. -->
+<script>
+        // Micro-interaction for active navbar state logic
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.add('shadow-sm');
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // Simple observer for animation triggers
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

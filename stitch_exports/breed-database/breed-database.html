@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PashuGyan - Breed Database</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#005312",
+                        "surface-container-low": "#f5f3f3",
+                        "surface": "#fbf9f8",
+                        "on-tertiary-fixed-variant": "#00468c",
+                        "on-tertiary-container": "#edf1ff",
+                        "surface-container-highest": "#e4e2e1",
+                        "tertiary-fixed-dim": "#a9c7ff",
+                        "tertiary-container": "#246dc8",
+                        "on-primary-fixed": "#002204",
+                        "primary-fixed": "#a3f69c",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#1b6d24",
+                        "secondary-container": "#ff8f00",
+                        "primary": "#0d631b",
+                        "surface-variant": "#e4e2e1",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fbf9f8",
+                        "outline-variant": "#bfcaba",
+                        "on-surface": "#1b1c1c",
+                        "primary-fixed-dim": "#88d982",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "secondary": "#8f4e00",
+                        "surface-container": "#f0eded",
+                        "on-secondary-fixed-variant": "#6d3a00",
+                        "background": "#fbf9f8",
+                        "primary-container": "#2e7d32",
+                        "on-secondary-fixed": "#2e1500",
+                        "on-tertiary-fixed": "#001b3d",
+                        "inverse-surface": "#303030",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f2f0f0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "container-margin-mobile": "16px",
+                        "container-margin-desktop": "32px",
+                        "stack-lg": "24px",
+                        "unit": "8px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .breed-card:hover {
+            transform: translateY(-4px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .active-filter {
+            background-color: #2e7d32;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter md:px-container-margin-desktop py-4 bg-surface dark:bg-on-surface shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">agriculture</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">PashuGyan</span>
+</div>
+<nav class="hidden md:flex items-center gap-stack-lg">
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Detect</a>
+<a class="font-label-lg text-label-lg font-medium text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 transition-colors" href="#">Database</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">How It Works</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">What We Provide</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Help</a>
+</nav>
+<button class="bg-primary-container text-on-primary-container font-label-lg text-label-lg px-6 py-2.5 rounded-full hover:shadow-lg active:opacity-80 transition-all duration-200">
+            Try Now
+        </button>
+</header>
+<main class="pt-24 pb-12 px-container-margin-mobile md:px-container-margin-desktop max-w-7xl mx-auto">
+<!-- Search & Filter Header -->
+<section class="mb-12">
+<div class="flex flex-col gap-6">
+<div>
+<h1 class="font-headline-lg text-headline-lg md:text-display-lg text-on-surface mb-2">Indian Breed Database</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">A comprehensive library of verified indigenous livestock breeds.</p>
+</div>
+<div class="flex flex-col md:flex-row gap-4">
+<!-- Search Bar -->
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary text-body-md shadow-sm" placeholder="Search breeds by name or state..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+<button class="active-filter px-6 py-2 rounded-full font-label-lg text-label-lg shadow-sm whitespace-nowrap transition-all">All Breeds</button>
+<button class="bg-surface-container-high text-on-surface-variant hover:bg-surface-variant px-6 py-2 rounded-full font-label-lg text-label-lg shadow-sm whitespace-nowrap transition-all">Cattle</button>
+<button class="bg-surface-container-high text-on-surface-variant hover:bg-surface-variant px-6 py-2 rounded-full font-label-lg text-label-lg shadow-sm whitespace-nowrap transition-all">Buffalo</button>
+<button class="bg-surface-container-high text-on-surface-variant hover:bg-surface-variant px-6 py-2 rounded-full font-label-lg text-label-lg shadow-sm whitespace-nowrap transition-all">Draft Purpose</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Breed Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-stack-lg">
+<!-- Card 1: Gir -->
+<div class="breed-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A side-profile shot of a majestic Gir cow, characterized by its distinctive bulging forehead and long pendulous ears. The animal stands gracefully in a sun-drenched Indian pasture during golden hour, its reddish-brown coat glistening under the warm natural light. The background features a soft-focus rural landscape with lush green foliage, emphasizing a peaceful and authentic agricultural setting. The overall mood is dignified and respectful, highlighting the cattle's genetic purity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAANpXplWTZoE2ovqnzmHhW9WURpANt1QDgaChXAni_X7v4nnNPwYW6dQKr1GyyjhEPmbHhfQT4YcXVqN8zmMPTJxf9fY8iwYC1NyZcME0h9ubi2pskFa0yHKgCHkCN5O-3pK40wRseCiDSWgF9PgH4xAq4CxC3nvWU_5TY96d5ch3ObIISdzmJSAO7MwhtnZR_GzR-UKh8tPoZG6N61NrpPKgV_qrUILcelKXiUtIEQK_JGFdlpZPEFy_NrDc4atCB3olKqibPH-vg"/>
+<div class="absolute top-3 right-3 bg-primary text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-md">Cattle</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-1">Gir</h3>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Gujarat</span>
+</div>
+<button class="mt-auto w-full py-3 border-2 border-primary text-primary font-label-lg text-label-lg rounded-lg hover:bg-primary hover:text-on-primary transition-all duration-300">
+                        View Profile
+                    </button>
+</div>
+</div>
+<!-- Card 2: Murrah -->
+<div class="breed-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A powerful Murrah buffalo with tight, spiral-curved horns and a jet-black muscular body. The animal is photographed in a high-contrast studio-like natural lighting setup that emphasizes its strong physical build and smooth hide texture. The environment is a clean, modern dairy farm with subtle grey concrete and soft ambient shadows. The image captures the resilience and high-utility nature of the breed, reflecting a professional agricultural tool aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGNjn-DceRDgHarSKNou-9eegxQG1pEgt0s6tjieYCEsgy_Z-iJOxS_i1iRk7x9XbK4Z4bEkSQPhPDGEJINtIos3h2CDojk7TX_den1ERaZfI4kq-_INLn2RRQrR7ATAnzfx7rvNtzAyck_dU7pvkrChgbMT6QVZoHMhlQG17Lb-WKV7a8DsqXhUmeUdNioVkbQVE-_70AyGfwmy238difEXf3d7Lde5rC3BHCXWdtpYzw3OJggTAypxWAPq63YVWQgKR9ssRd75Rl"/>
+<div class="absolute top-3 right-3 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full shadow-md">Buffalo</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-1">Murrah</h3>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Haryana &amp; Punjab</span>
+</div>
+<button class="mt-auto w-full py-3 border-2 border-primary text-primary font-label-lg text-label-lg rounded-lg hover:bg-primary hover:text-on-primary transition-all duration-300">
+                        View Profile
+                    </button>
+</div>
+</div>
+<!-- Card 3: Sahiwal -->
+<div class="breed-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close-up of a Sahiwal cow with a deep reddish-dun coat and a heavy dewlap, standing calmly in a well-maintained barn. The lighting is bright and even, casting soft ambient shadows that define the animal's gentle features. The background is a clean, organized cattle shed with natural wooden textures and earthen tones, aligning with a modern yet traditional farming vibe. The focus is sharp on the animal's face, conveying a sense of health and superior breed quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDizrE5IniHdOy_BsAOaEvzSGwQ-rL7roXFxUC09bos479evclTyncb0T9xPtlTXiqBZ1vPymYqgIhAaTCP_ULx1SbGQQPpZ3eQhed4sRN5w2BNf6_dw2F4qmzQ00LKFSvls_hMvbsq4HAghEbjs545qVOb2VJ_J4Qmu2dUs5RsXf6YrwsfntP9KoutpdXX5v8fcAGKWu1NufeQ2NbobECOV-Wg24RsNHP9ts5jiQ-2LdMvM3dGUyBSKSMZ9eHyqWpODmHuphdLGZJz"/>
+<div class="absolute top-3 right-3 bg-primary text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-md">Cattle</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-1">Sahiwal</h3>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Punjab</span>
+</div>
+<button class="mt-auto w-full py-3 border-2 border-primary text-primary font-label-lg text-label-lg rounded-lg hover:bg-primary hover:text-on-primary transition-all duration-300">
+                        View Profile
+                    </button>
+</div>
+</div>
+<!-- Card 4: Jaffrabadi -->
+<div class="breed-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A massive Jaffrabadi buffalo walking across a dry riverbed in the Saurashtra region. The lighting is intense midday sun, creating sharp highlights on its prominent forehead and massive horns. The environment is rugged and arid, showcasing the breed's hardy nature and adaptability to harsh climates. The color palette consists of deep blacks, sun-bleached browns, and a bright blue sky, presented in a clean, high-resolution documentary photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHZ5yQ8fWrQsrWab46QUl3k8law3Xl44ZF7afnTopNcRDs1WQjwU6UYrGcVBJznjXDmYeeXsm-_T4_ZR9HxFy8gk8CSZPdHO0IdtVYiY2HzfX-jq0WsFKYPUnFRvo0dGWWAW8a7BP3wEowNwllzRUrXBqFiWxEnqTIfFhxwJlYWWpmDXOi_rXn2YXibdSiF1VwlK3wicLGS9YaqPHufja8xk39S97dbfHt1zT01rrP2MTvY9WDkZdfO4ovMDHndVW5CUjcY4KrePoj"/>
+<div class="absolute top-3 right-3 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full shadow-md">Buffalo</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-1">Jaffrabadi</h3>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Gujarat</span>
+</div>
+<button class="mt-auto w-full py-3 border-2 border-primary text-primary font-label-lg text-label-lg rounded-lg hover:bg-primary hover:text-on-primary transition-all duration-300">
+                        View Profile
+                    </button>
+</div>
+</div>
+<!-- Repeat Grid Items for Layout Demonstration -->
+<!-- Card 5: Tharparkar -->
+<div class="breed-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A Tharparkar cow with its iconic white coat standing in a dusty, sunlit arid landscape of Rajasthan. The lighting is warm and directional, highlighting the smooth contours of its body and the subtle grey markings around its neck. The setting is a minimalist desert with distant dunes and sparse shrubs, emphasizing the breed's incredible drought resistance. The image has a clean, airy feel with a high-key color palette of whites, sands, and light greys." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4ev-H6TVWFOiwrpH_SAEnPy3BWL_sU9ZddwBDAZT6z_Ec5LA6cl47080NZO0NlrgXEJQ3YrAPYneHdde2_KI54fBnf54SCrna2PcVyr2NQvY7diK6JzmSSC4lv-ZZKqje1lEDFVJRJy-mwyNIirkypzaJYhMAT_SPDGHKJOvc5l-x22T6jF22HgIQ7ytHUpDpTyDwLVlivh0Sgwvc-qu0LasjOD0dIadPmEPFdh-jl1OsHXQZkiOrMfURV60QYThKKPfQXnz00p5a"/>
+<div class="absolute top-3 right-3 bg-primary text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-md">Cattle</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-1">Tharparkar</h3>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Rajasthan</span>
+</div>
+<button class="mt-auto w-full py-3 border-2 border-primary text-primary font-label-lg text-label-lg rounded-lg hover:bg-primary hover:text-on-primary transition-all duration-300">
+                        View Profile
+                    </button>
+</div>
+</div>
+<!-- Card 6: Nili Ravi -->
+<div class="breed-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A Nili-Ravi buffalo bathing in a rural pond during a misty morning. The lighting is soft and diffused, creating a serene, painterly quality. The animal's wall-eyes and white markings on the forehead are clearly visible through the thin veil of morning mist. The surrounding environment is lush and verdant, with dark green water reflections and heavy atmospheric depth. The mood is tranquil and captures a classic moment of Indian rural life in high fidelity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkQzramhDy6aCnyRNLzGnjVXfKYd46W-4v-eKBzIiNPJd5UdRoqk96nogH5Rly8h-JFpQRW0JhUZNqwANDF-3OCMD0Nnwr_OwZ30q1TI8Qyt4oXlpJHgo6Bfs6WZk-qZR-Y8VXpLx_vRmQwcL0vlSV5ZYRFOgntataVeTzHTaFdSgCPKLNB45CkSuWnh6VE8CDTKH9ukLyjWVkgrrVcQd-A0XSjOqp6XPFsCn7rzPnH9j-6RFXC8kfTUvFPLZgA9yhljMVkroFCvhM"/>
+<div class="absolute top-3 right-3 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full shadow-md">Buffalo</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-1">Nili Ravi</h3>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Punjab</span>
+</div>
+<button class="mt-auto w-full py-3 border-2 border-primary text-primary font-label-lg text-label-lg rounded-lg hover:bg-primary hover:text-on-primary transition-all duration-300">
+                        View Profile
+                    </button>
+</div>
+</div>
+<!-- Card 7: Hallikar -->
+<div class="breed-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A lean and athletic Hallikar bull with long, vertical, pointed horns, standing alert in a traditional Karnataka village square. The lighting is crisp afternoon sun, casting sharp shadows that highlight its muscular frame and grey-white skin. The background features rustic stone structures and a clean village path, creating a sense of heritage and functional strength. The image style is sharp and professional, emphasizing the draft power and agility of this premium breed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAXAyfZBobxI_Stx_vA3p1BfOTklcRJyemDT37JfG4fiVonHhl3Uz-ZZlVPW4GHzCWHiAAP5Hz0Wx9tuM0N6Hhpyj2gX4ihMxnHk_YFnRWGrcKeixr8GWV5K5A2cixq9dVce1or9Qt0j2eVJsAwZyuc0u92Pynlov65iNMXFmFgu3EZfzB8VndEUGnTWQM37peTQ6t1hFZpll7XUMYG_5yGO1If7tA4GwEMJrd6Poxav5J_3lEZmweBkWhePdzmnkWuhHAU4jTjl_B"/>
+<div class="absolute top-3 right-3 bg-primary text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-md">Cattle</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-1">Hallikar</h3>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Karnataka</span>
+</div>
+<button class="mt-auto w-full py-3 border-2 border-primary text-primary font-label-lg text-label-lg rounded-lg hover:bg-primary hover:text-on-primary transition-all duration-300">
+                        View Profile
+                    </button>
+</div>
+</div>
+<!-- Card 8: Surti -->
+<div class="breed-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col group">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A Surti buffalo standing in a clean, modern dairy shed with a well-ventilated roof. The buffalo has characteristic sickle-shaped horns and a dark grey coat. The lighting is soft and even, highlighting the clean environment and the animal's healthy skin condition. The background is a minimalist mix of grey metal and white walls, reinforcing a professional agricultural expert perspective. The overall visual is clear, informative, and clinical in its presentation of breed standards." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1jnHkZecebpzzxFg7OlKsc5N_uVzGgKwopoyn7_I-oeeVrie7kH9A5z88KBUgr3-yKojfqRPcVucMQPCvdufFw2vVFZDemwZ_LQCAIK3qY_MvHtXZUPE_ovkvBR1MA-zikPrOGerG4aRqDiwpawoFRfMmlIgH04ZPeOJ46FG7LR8YWFqujorFj5SDcuECf01_7tQl4Hc2rdKhAiew5jxYph42OMdB-bYJmOjJ9x-V5WM-jLhdgV_KnpqIaYQ2mhNtNSY16DMsQxLs"/>
+<div class="absolute top-3 right-3 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full shadow-md">Buffalo</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-1">Surti</h3>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Gujarat</span>
+</div>
+<button class="mt-auto w-full py-3 border-2 border-primary text-primary font-label-lg text-label-lg rounded-lg hover:bg-primary hover:text-on-primary transition-all duration-300">
+                        View Profile
+                    </button>
+</div>
+</div>
+</section>
+<!-- Pagination / Load More -->
+<div class="mt-16 flex justify-center">
+<button class="flex items-center gap-2 px-8 py-3 bg-surface-container text-on-surface-variant font-label-lg text-label-lg rounded-full hover:bg-surface-variant transition-all">
+                Load More Breeds
+                <span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-gutter md:px-container-margin-desktop flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md bg-surface-container-highest dark:bg-inverse-surface mt-12">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">agriculture</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">PashuGyan</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant max-w-sm">
+                © 2024 PashuGyan. Supporting Indian Agriculture with AI-driven precision.
+            </p>
+</div>
+<div class="flex flex-wrap gap-x-8 gap-y-4">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all active:scale-95" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all active:scale-95" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all active:scale-95" href="#">Contact Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all active:scale-95" href="#">About Us</a>
+</div>
+</footer>
+<!-- FAB for quick scan (Mobile Only) -->
+<button class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.15)] flex items-center justify-center z-40 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</button>
+<script>
+        // Simple filter interaction logic
+        const filterButtons = document.querySelectorAll('.flex.gap-2 button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active-filter', 'bg-primary', 'text-on-primary'));
+                filterButtons.forEach(b => b.classList.add('bg-surface-container-high', 'text-on-surface-variant'));
+                
+                btn.classList.add('active-filter');
+                btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

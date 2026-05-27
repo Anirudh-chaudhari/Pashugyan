@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Support Hub | PashuGyan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#005312",
+                        "surface-container-low": "#f5f3f3",
+                        "surface": "#fbf9f8",
+                        "on-tertiary-fixed-variant": "#00468c",
+                        "on-tertiary-container": "#edf1ff",
+                        "surface-container-highest": "#e4e2e1",
+                        "tertiary-fixed-dim": "#a9c7ff",
+                        "tertiary-container": "#246dc8",
+                        "on-primary-fixed": "#002204",
+                        "primary-fixed": "#a3f69c",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#1b6d24",
+                        "secondary-container": "#ff8f00",
+                        "primary": "#0d631b",
+                        "surface-variant": "#e4e2e1",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fbf9f8",
+                        "outline-variant": "#bfcaba",
+                        "on-surface": "#1b1c1c",
+                        "primary-fixed-dim": "#88d982",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "secondary": "#8f4e00",
+                        "surface-container": "#f0eded",
+                        "on-secondary-container": "#623400",
+                        "inverse-primary": "#88d982",
+                        "secondary-fixed": "#ffdcc2",
+                        "outline": "#707a6c",
+                        "on-surface-variant": "#40493d",
+                        "tertiary-fixed": "#d6e3ff",
+                        "on-secondary-fixed-variant": "#6d3a00",
+                        "background": "#fbf9f8",
+                        "primary-container": "#2e7d32",
+                        "surface-container": "#f0eded",
+                        "on-secondary-fixed": "#2e1500",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#001b3d",
+                        "inverse-surface": "#303030",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f2f0f0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "16px",
+                        "container-margin-mobile": "16px",
+                        "container-margin-desktop": "32px",
+                        "stack-lg": "24px",
+                        "unit": "8px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .faq-item[open] .chevron {
+            transform: rotate(180deg);
+        }
+        .hero-pattern {
+            background-color: #fbf9f8;
+            background-image: radial-gradient(#0d631b11 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter md:px-container-margin-desktop py-4 bg-surface dark:bg-on-surface shadow-sm">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">PashuGyan</span>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Detect</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">Database</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">How It Works</a>
+<a class="font-label-lg text-label-lg font-medium text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors" href="#">What We Provide</a>
+<a class="font-label-lg text-label-lg font-medium text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1" href="#">Help</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-lg text-label-lg hover:opacity-90 transition-all duration-200">
+            Try Now
+        </button>
+</nav>
+<main class="pt-24 pb-12">
+<!-- Hero Search Section -->
+<section class="hero-pattern py-16 px-gutter md:px-container-margin-desktop flex flex-col items-center text-center">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-4 max-md:font-headline-lg-mobile max-md:text-headline-lg-mobile">How can we help you?</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-8">Get the most out of PashuGyan with our comprehensive guides, FAQs, and expert support for your livestock management.</p>
+<div class="w-full max-w-xl relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all shadow-sm" placeholder="Search for help topics..." type="text"/>
+</div>
+</section>
+<!-- FAQ Section: Bento Style -->
+<section class="px-gutter md:px-container-margin-desktop py-12">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface">Frequently Asked Questions</h2>
+<a class="text-primary font-label-lg flex items-center gap-1 hover:underline" href="#">View all topics <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- FAQ Item 1 -->
+<div class="md:col-span-2 bg-surface-container-lowest p-6 rounded-xl border border-surface-variant hover:shadow-md transition-shadow cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-label-sm font-label-sm uppercase tracking-wider">Most Popular</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">help</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-2">How to get a better photo?</h3>
+<p class="text-on-surface-variant mb-4">Good lighting and steady hands are key. Avoid harsh shadows and ensure the animal is centered in the frame for 99% accuracy.</p>
+<button class="text-primary font-label-lg hover:underline flex items-center gap-1">Read detailed guide <span class="material-symbols-outlined text-[16px]">open_in_new</span></button>
+</div>
+<!-- FAQ Item 2 -->
+<div class="bg-secondary-fixed p-6 rounded-xl border border-outline-variant flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer group">
+<div>
+<h3 class="font-title-lg text-title-lg mb-2 text-on-secondary-fixed">Is it free?</h3>
+<p class="text-on-secondary-fixed-variant">PashuGyan offers a generous free tier for individual farmers. For commercial fleets, we have enterprise solutions.</p>
+</div>
+<span class="material-symbols-outlined text-on-secondary-fixed mt-4 self-end group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<!-- FAQ Item 3 -->
+<div class="bg-tertiary-fixed p-6 rounded-xl border border-outline-variant flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer group">
+<div>
+<h3 class="font-title-lg text-title-lg mb-2 text-on-tertiary-fixed">Offline access</h3>
+<p class="text-on-tertiary-fixed-variant">Yes! You can scan animals in the field without internet. Results will sync once you are back in range.</p>
+</div>
+<span class="material-symbols-outlined text-on-tertiary-fixed mt-4 self-end group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<!-- FAQ Item 4 -->
+<div class="md:col-span-2 bg-surface-container p-6 rounded-xl border border-surface-variant hover:shadow-md transition-shadow cursor-pointer">
+<h3 class="font-title-lg text-title-lg mb-4">Common Topics</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="flex items-center gap-3 p-3 bg-surface-container-lowest rounded-lg border border-outline-variant hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+<span class="font-label-lg">Account Setup</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-lowest rounded-lg border border-outline-variant hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary">database</span>
+<span class="font-label-lg">Breed Database</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-lowest rounded-lg border border-outline-variant hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary">security</span>
+<span class="font-label-lg">Data Privacy</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-lowest rounded-lg border border-outline-variant hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+<span class="font-label-lg">Marketplace Help</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Photography Guide Section -->
+<section class="px-gutter md:px-container-margin-desktop py-12 bg-on-primary-fixed-variant text-white rounded-3xl mx-gutter md:mx-container-margin-desktop shadow-xl overflow-hidden relative">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary opacity-20 blur-3xl -mr-32 -mt-32 rounded-full"></div>
+<div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-4 max-md:font-headline-lg-mobile max-md:text-headline-lg-mobile">Photography Guide</h2>
+<p class="font-body-lg text-body-lg text-primary-fixed mb-8 opacity-90">Maximize the accuracy of our AI by following these simple professional photography tips designed for farm environments.</p>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container">check_circle</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg">Do: Natural Lighting</h4>
+<p class="text-primary-fixed text-body-md">Take photos during early morning or late afternoon for soft, even light.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container">check_circle</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg">Do: Side Profile</h4>
+<p class="text-primary-fixed text-body-md">Capture the full side of the animal to identify key anatomical markers.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-full bg-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white">cancel</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg">Don't: Blurry Images</h4>
+<p class="text-primary-fixed text-body-md">Ensure the animal is stationary. Motion blur significantly drops AI confidence.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-square rounded-2xl overflow-hidden shadow-lg border-4 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional, clear side-profile photograph of a healthy Sahiwal cow standing in a sun-drenched Indian farm. The lighting is golden and soft, highlighting the texture of the coat and the distinctive hump. The image is crisp with high contrast and a shallow depth of field, showcasing the ideal way to photograph livestock for AI identification." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCByvYmHUnbCDmTB5N2xu5esLrhgtGZxTIcm8LGqZ0YSwNgJNZncyslrv6_jqf51bwmOiFrKd0yDh55RJOaKWIpLh-3W_i3wYjx8-ySN_ThHZiyaHkkCv9ttN6Jwp4CogxGEgt9oAAbOAE5X9yZAew5XUibqA1l33Oxj8EymCSMapycD2KqV1KmRERZ66TaB1YRxwnmtyhZTmr4zO8m2t_1yO06wCu01cdagPslarfd1XBJ5gwTr8wa9YkEas9dkFMAhCaYN6-vEHd"/>
+<div class="absolute bottom-2 left-2 bg-primary-container px-2 py-1 rounded text-[10px] font-bold uppercase">Perfect</div>
+</div>
+<div class="aspect-square rounded-2xl overflow-hidden shadow-lg border-4 border-error/50">
+<img class="w-full h-full object-cover grayscale brightness-50" data-alt="A poorly lit, slightly blurry photo of a cow in a dark stable with heavy shadows obscuring its features. The background is cluttered and the subject is off-center, demonstrating an incorrect way to take photos for AI analysis. The visual style is realistic but intentionally serves as a counter-example to good photography practices." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCza2b7c_tnnXQF5P8wGo3DYVvy64gAHY8WCC3Of-MACdiE6s-VM_HFop299SqyxDZRYc-N_Pmwb-m0XuqI4MjPfzpzw5TsxcKNxQsw6zHfklcVhbLxLK0N8Q57MbSLCF7UKz8cYfUq3yxXeBXb7iA0vi1gdi_LL2O2GzCjTRys7dn2ONScYoGh_I0x-Osms6_rbyISuoXJ3K-81vAvwmNd7cUCzF3zgfvx22bp48TetnwHnudDYDg9CwMnrVV_VToyGiGRUu7-a39b"/>
+<div class="absolute bottom-2 left-2 bg-error px-2 py-1 rounded text-[10px] font-bold uppercase">Avoid</div>
+</div>
+<div class="col-span-2 rounded-2xl overflow-hidden shadow-lg h-40">
+<img class="w-full h-full object-cover" data-alt="A wide angle, panoramic view of a clean, modern dairy farm in India during sunrise. The scene is peaceful with rows of healthy cattle, advanced technological monitoring equipment, and lush green fields in the background. The lighting is ethereal and bright, reflecting a professional and trustworthy agricultural environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXRdHxlpzUMyVypgAXLc3DNyfy1sb5rDlXyi2fIbeWvDyvkf7UwHo83R33MsxoonxkArsGPhfXKZBEknLc2lcy4aRKZPMtELqBY4ftJa_MgdesIxb-2W6ZMH9ACZgE5x8gx41dYtWTNtHSwXEaa2m-XZTSDfagqJ9gtMCCZwleh4Ow7aKQHkEnxuW3SRslIoPBGduRSB_FS4mSPFyJ0PhSyWbh2IRJJaoptqXmbq17WreyhW5N-yrNCNIv533VNj-8jl1SFzGnoJ5A"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Form Section -->
+<section class="px-gutter md:px-container-margin-desktop py-16 grid lg:grid-cols-2 gap-16 items-start">
+<div>
+<h2 class="font-headline-md text-headline-md mb-4">Still have questions?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">Our support team is available Monday to Saturday, 9 AM - 6 PM. We typically respond within 24 hours.</p>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">mail</span>
+</div>
+<div>
+<p class="font-label-lg">Email us</p>
+<p class="text-primary font-bold">support@pashugyan.com</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">call</span>
+</div>
+<div>
+<p class="font-label-lg">Call us</p>
+<p class="text-primary font-bold">+91 800-PASHU-GYAN</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<div>
+<p class="font-label-lg">Main Office</p>
+<p class="text-on-surface-variant">AgriTech Hub, Sector 5, New Delhi, India</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-surface-variant shadow-sm">
+<form class="space-y-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="font-label-lg text-on-surface">First Name</label>
+<input class="w-full h-12 px-4 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-lg text-on-surface">Last Name</label>
+<input class="w-full h-12 px-4 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="text"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-lg text-on-surface">Email Address</label>
+<input class="w-full h-12 px-4 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-lg text-on-surface">Subject</label>
+<select class="w-full h-12 px-4 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all bg-white">
+<option>Technical Support</option>
+<option>Billing Inquiry</option>
+<option>Breed Identification Feedback</option>
+<option>Other</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-lg text-on-surface">Message</label>
+<textarea class="w-full p-4 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none" rows="4"></textarea>
+</div>
+<button class="w-full py-4 bg-primary text-white rounded-lg font-bold hover:bg-primary/90 transition-all shadow-md active:scale-[0.98]" type="submit">
+                        Send Message
+                    </button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-gutter md:px-container-margin-desktop flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md bg-surface-container-highest dark:bg-inverse-surface mt-12">
+<div class="flex flex-col gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">PashuGyan</span>
+<p class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant max-w-sm">© 2024 PashuGyan. Supporting Indian Agriculture with AI-driven precision.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all" href="#">Contact Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim underline transition-all" href="#">About Us</a>
+</div>
+</footer>
+<!-- Floating Action Button (Contextual) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">camera</span>
+</button>
+<script>
+        // Simple search highlight interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.grid > div');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                } else {
+                    card.style.opacity = '0.4';
+                    card.style.transform = 'scale(0.98)';
+                }
+            });
+        });
+
+        // Parallax effect on hero pattern
+        window.addEventListener('scroll', () => {
+            const pattern = document.querySelector('.hero-pattern');
+            const scrolled = window.pageYOffset;
+            pattern.style.backgroundPositionY = scrolled * 0.5 + 'px';
+        });
+    </script>
+</body></html>

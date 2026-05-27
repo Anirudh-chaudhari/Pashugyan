@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PashuGyan
 
-## Getting Started
+PashuGyan is a Next.js 14 web app for Indian livestock breed detection and education. It includes:
 
-First, run the development server:
+- AI-powered breed detection
+- A searchable cattle and buffalo breed database
+- A farmer dashboard with saved scan history
+- Marketing/help pages rebuilt from Stitch designs
 
-```bash
+## Stack
+
+- Next.js 14
+- React 18
+- Tailwind CSS
+- Zustand for local scan history
+- Optional Clerk auth
+- Optional Supabase integration
+
+## Run locally
+
+```powershell
+npm install
+Copy-Item .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://127.0.0.1:3000](http://127.0.0.1:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production launch
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```powershell
+npm install
+Copy-Item .env.example .env.production.local
+npm run build
+npm run start -- --hostname 0.0.0.0 --port 3000
+```
 
-## Learn More
+## Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+`NEXT_PUBLIC_SITE_URL`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Public base URL used for metadata and sitemap.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`ML_API_URL` or `NEXT_PUBLIC_ML_API_URL`
 
-## Deploy on Vercel
+- Optional override for the live breed-classification backend.
+- If unset, the app uses the current Hugging Face Space default.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Optional. Enables live Clerk sign-in/sign-up.
+- If omitted, auth pages fall back to a safe setup-pending state.
+
+`NEXT_PUBLIC_SUPABASE_URL`
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+
+- Optional. Enables Supabase-backed features where configured.
+
+## Quality checks
+
+```powershell
+npm run lint
+npm run typecheck
+npm run build
+```
