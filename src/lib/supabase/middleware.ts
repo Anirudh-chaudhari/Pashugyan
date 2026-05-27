@@ -6,6 +6,14 @@ import {
   hasSupabaseEnv,
 } from "@/lib/supabase/client";
 
+const PROTECTED_PATH_PREFIXES = ["/dashboard", "/detect"];
+
+function isProtectedPath(pathname: string) {
+  return PROTECTED_PATH_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+}
+
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
 
@@ -41,7 +49,19 @@ export async function updateSession(request: NextRequest) {
       },
     );
 
-    await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user && isProtectedPath(request.nextUrl.pathname)) {
+      const signInUrl = request.nextUrl.clone();
+      const redirectTo = `${request.nextUrl.pathname}${request.nextUrl.search}`;
+      signInUrl.pathname = "/sign-in";
+      signInUrl.search = "";
+      signInUrl.searchParams.set("redirectTo", redirectTo);
+      return NextResponse.redirect(signInUrl);
+    }
+
     response.headers.set("Cache-Control", "private, no-store");
     return response;
   } catch {

@@ -11,11 +11,20 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 const BACKGROUND_IMAGE_PATH = "/images/stitch/sign-in-farm-background.jpg";
 const GOOGLE_ICON_PATH = "/images/stitch/sign-in-google.png";
 
+function getSafeRedirectTarget(value: string | null) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) {
+    return "/dashboard";
+  }
+
+  return value;
+}
+
 export function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
   const { hasSupabase, isReady, user } = useSupabaseAuth();
+  const redirectTo = getSafeRedirectTarget(searchParams.get("redirectTo"));
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,9 +35,9 @@ export function LoginPage() {
 
   useEffect(() => {
     if (isReady && user) {
-      router.replace("/dashboard");
+      router.replace(redirectTo);
     }
-  }, [isReady, router, user]);
+  }, [isReady, redirectTo, router, user]);
 
   useEffect(() => {
     if (searchParams.get("error") === "confirmation_failed") {
@@ -70,7 +79,7 @@ export function LoginPage() {
         toast.success("Signed in successfully.");
       }
 
-      router.push("/dashboard");
+      router.push(redirectTo);
       router.refresh();
     } catch (error) {
       const message =
@@ -254,7 +263,10 @@ export function LoginPage() {
             <div className="mt-8 text-center">
               <p className="text-base text-[#40493d]">
                 Don&apos;t have an account?{" "}
-                <Link className="font-bold text-[#0d631b] hover:underline" href="/sign-up">
+                <Link
+                  className="font-bold text-[#0d631b] hover:underline"
+                  href={`/sign-up?redirectTo=${encodeURIComponent(redirectTo)}`}
+                >
                   Sign Up for Free
                 </Link>
               </p>

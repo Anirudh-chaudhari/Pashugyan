@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useSupabaseAuth } from "@/components/auth/supabase-auth-provider";
@@ -11,6 +11,14 @@ import { getUserInitials } from "@/lib/supabase/profile";
 
 const GOOGLE_ICON_PATH = "/images/stitch/sign-up-google.png";
 const MAX_AVATAR_FILE_SIZE = 5 * 1024 * 1024;
+
+function getSafeRedirectTarget(value: string | null) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) {
+    return "/dashboard";
+  }
+
+  return value;
+}
 
 function readAvatarDataUrl(file: File) {
   return new Promise<string>((resolve, reject) => {
@@ -48,8 +56,10 @@ function readAvatarDataUrl(file: File) {
 
 export function RegisterPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const supabase = useMemo(() => createSupabaseBrowserClient(), []);
   const { hasSupabase, isReady, user } = useSupabaseAuth();
+  const redirectTo = getSafeRedirectTarget(searchParams.get("redirectTo"));
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -63,9 +73,9 @@ export function RegisterPage() {
 
   useEffect(() => {
     if (isReady && user) {
-      router.replace("/dashboard");
+      router.replace(redirectTo);
     }
-  }, [isReady, router, user]);
+  }, [isReady, redirectTo, router, user]);
 
   const submitLabel = isSubmitting ? "Creating Account..." : "Create Account";
   const avatarInitials = getUserInitials(fullName || "Farmer");
@@ -170,7 +180,7 @@ export function RegisterPage() {
       }
 
       toast.success("Farmer account created and signed in.");
-      router.push("/dashboard");
+      router.push(redirectTo);
       router.refresh();
     } catch (error) {
       const message =
@@ -422,7 +432,10 @@ export function RegisterPage() {
 
           <p className="mt-6 text-center text-base text-[#40493d]">
             Already have an account?{" "}
-            <Link className="font-bold text-[#0d631b] hover:underline" href="/sign-in">
+            <Link
+              className="font-bold text-[#0d631b] hover:underline"
+              href={`/sign-in?redirectTo=${encodeURIComponent(redirectTo)}`}
+            >
               Log in
             </Link>
           </p>
