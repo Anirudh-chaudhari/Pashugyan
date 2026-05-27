@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 
 const standaloneRoutes = new Set([
+  "/",
   "/how-it-works",
   "/what-we-provide",
   "/help-guide",

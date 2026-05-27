@@ -42,6 +42,11 @@ export function LoginPage() {
   useEffect(() => {
     if (searchParams.get("error") === "confirmation_failed") {
       setNotice("That confirmation link is invalid or expired. Please try signing in.");
+      return;
+    }
+
+    if (searchParams.get("registered") === "1") {
+      setNotice("Account created successfully. Please sign in to continue.");
     }
   }, [searchParams]);
 

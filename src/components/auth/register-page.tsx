@@ -3,10 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useSupabaseAuth } from "@/components/auth/supabase-auth-provider";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { getUserInitials } from "@/lib/supabase/profile";
 
 const GOOGLE_ICON_PATH = "/images/stitch/sign-up-google.png";
@@ -57,7 +56,6 @@ function readAvatarDataUrl(file: File) {
 export function RegisterPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const supabase = useMemo(() => createSupabaseBrowserClient(), []);
   const { hasSupabase, isReady, user } = useSupabaseAuth();
   const redirectTo = getSafeRedirectTarget(searchParams.get("redirectTo"));
 
@@ -118,7 +116,7 @@ export function RegisterPage() {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!hasSupabase || !supabase) {
+    if (!hasSupabase) {
       toast.error("Supabase is not configured yet for this project.");
       return;
     }
@@ -170,17 +168,10 @@ export function RegisterPage() {
         );
       }
 
-      const { error } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
-        password,
-      });
-
-      if (error) {
-        throw error;
-      }
-
-      toast.success("Farmer account created and signed in.");
-      router.push(redirectTo);
+      toast.success("Account created. Please sign in to continue.");
+      router.push(
+        `/sign-in?registered=1&redirectTo=${encodeURIComponent(redirectTo)}`,
+      );
       router.refresh();
     } catch (error) {
       const message =
