@@ -1,64 +1,79 @@
+"use client";
+
 import Link from "next/link";
+import { buildSignUpHref } from "@/lib/auth-links";
+import { useAppStore } from "@/stores/useAppStore";
 import {
-  ArrowRight,
-  CheckCircle2,
-  History,
-  LayoutDashboard,
-  Leaf,
-  ScanSearch,
+  ChartColumn,
+  MoonStar,
+  Search,
   ShieldCheck,
   Sparkles,
+  Users,
 } from "lucide-react";
-import { buildSignUpHref } from "@/lib/auth-links";
 
-const highlights = [
+const navLinks = [
+  { href: "/detect", label: "BreedDetection" },
+  { href: "/database", label: "Database" },
+  { href: "/how-it-works", label: "HowItWorks" },
+  { href: "/what-we-provide", label: "WhatWeProvide" },
+  { href: "/help-guide", label: "Help & Guide" },
+];
+
+const featureCards = [
   {
-    icon: LayoutDashboard,
-    title: "Dashboard first",
-    description: "Your personal workspace opens only after sign in.",
+    icon: Search,
+    title: "Accurate Identification",
+    description:
+      "Upload an image and get accurate breed identification within seconds.",
   },
   {
-    icon: ScanSearch,
-    title: "Breed detection",
-    description: "Upload a livestock photo when you are ready to identify it.",
+    icon: ChartColumn,
+    title: "Data-Driven Insights",
+    description:
+      "Get detailed information about each breed, including characteristics and key traits.",
   },
   {
-    icon: History,
-    title: "Private history",
-    description: "Each farmer keeps a unique scan history tied to their account.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Secure access",
-    description: "Supabase sessions keep your data safe across devices.",
+    icon: Users,
+    title: "Simple & Easy",
+    description: "Just upload a photo, no technical knowledge required.",
   },
 ];
 
-const dashboardItems = [
-  "Breed detection and upload tools",
-  "Breed database and references",
-  "Detection history and insights",
-  "Personalized farmer account view",
+const infoCards = [
+  {
+    title: "Breed detection",
+    description: "Start an analysis from the first screen when you're ready.",
+  },
+  {
+    title: "Private history",
+    description: "Keep each farmer's scan history tied to their account.",
+  },
+  {
+    title: "Dashboard access",
+    description: "Logged-in farmers land on the full dashboard after sign in.",
+  },
 ];
 
 export function HomeLanding() {
-  return (
-    <div className="relative min-h-screen overflow-hidden bg-[#fbf9f8] text-[#1b1c1c]">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-8rem] top-[-10rem] h-[26rem] w-[26rem] rounded-full bg-[#2e7d32]/10 blur-3xl" />
-        <div className="absolute right-[-6rem] top-[18%] h-[20rem] w-[20rem] rounded-full bg-[#ff8f00]/10 blur-3xl" />
-        <div className="absolute bottom-[-8rem] left-[18%] h-[18rem] w-[18rem] rounded-full bg-[#246dc8]/10 blur-3xl" />
-        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-white/80 to-transparent" />
-      </div>
+  const toggleTheme = useAppStore((state) => state.toggleTheme);
 
-      <header className="relative z-10 border-b border-[#bfcaba]/70 bg-white/65 backdrop-blur-xl">
-        <div className="mx-auto flex h-20 w-full max-w-[1440px] items-center justify-between gap-4 px-4 md:px-8">
-          <Link href="/" className="flex items-center gap-3 rounded-full">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#2e7d32] text-white shadow-[0_12px_28px_rgba(46,125,50,.24)]">
-              <Leaf className="h-5 w-5" />
+  return (
+    <div className="min-h-screen bg-[#fbf9f8] text-[#1b1c1c]">
+      <style jsx global>{`
+        .material-symbols-outlined {
+          font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        }
+      `}</style>
+
+      <header className="fixed left-0 top-0 z-50 w-full border-b border-[#bfcaba] bg-[rgba(251,249,248,.82)] backdrop-blur-md">
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2e7d32] text-white shadow-sm">
+              <Sparkles className="h-5 w-5" />
             </div>
-            <div>
-              <div className="font-display text-lg font-bold tracking-tight text-[#1b1c1c]">
+            <div className="leading-tight">
+              <div className="text-lg font-semibold text-[#1b1c1c]">
                 PashuGyan
               </div>
               <div className="text-[11px] uppercase tracking-[0.28em] text-[#40493d]/70">
@@ -67,149 +82,227 @@ export function HomeLanding() {
             </div>
           </Link>
 
+          <nav className="hidden items-center gap-8 md:flex">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-[14px] font-medium text-[#40493d] transition-colors hover:text-[#2e7d32]"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
           <div className="flex items-center gap-3">
+            <button
+              aria-label="Toggle theme"
+              className="hidden h-10 w-10 items-center justify-center rounded-full border border-[#bfcaba] bg-white text-[#1b1c1c] transition hover:bg-[#f5f3f3] md:inline-flex"
+              onClick={toggleTheme}
+              type="button"
+            >
+              <MoonStar className="h-5 w-5" />
+            </button>
             <Link
               href="/sign-in?redirectTo=/dashboard"
-              className="rounded-full border border-[#bfcaba] bg-white px-4 py-2.5 text-sm font-semibold text-[#1b1c1c] transition hover:bg-[#f5f3f3]"
+              className="rounded-full border border-[#2e7d32] px-5 py-2 text-sm font-semibold text-[#2e7d32] transition hover:bg-[#2e7d32]/5"
             >
-              Sign in
-            </Link>
-            <Link
-              href={buildSignUpHref("/dashboard")}
-              className="rounded-full bg-[#ff8f00] px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:brightness-95 active:scale-95"
-            >
-              Create account
+              Sign In
             </Link>
           </div>
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-[1440px] items-center gap-12 px-4 py-10 md:px-8 lg:grid-cols-[1.05fr_.95fr] lg:py-16">
-        <section className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#2e7d32]/15 bg-[#2e7d32]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#2e7d32]">
-            <Sparkles className="h-4 w-4" />
-            Namaste
+      <main className="mx-auto max-w-7xl px-4 pb-20 pt-24 sm:px-6">
+        <section
+          className="relative flex min-h-[52vh] flex-col items-center justify-center overflow-hidden rounded-[2rem] bg-cover bg-center p-6 text-center shadow-sm sm:min-h-[60vh] sm:p-8"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(21,33,17,.56), rgba(21,33,17,.82)), url('/images/stitch/sign-in-farm-background.jpg')",
+          }}
+        >
+          <div className="max-w-3xl">
+            <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/90 backdrop-blur-sm">
+              <ShieldCheck className="h-4 w-4" />
+              Namaste
+            </div>
+
+            <h1 className="mt-5 text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+              Identify Cow &amp; Buffalo Breeds Instantly
+            </h1>
+            <h2 className="mt-4 text-base leading-7 text-white/90 sm:text-lg">
+              Upload a photo and get accurate breed details in seconds. Make
+              better decisions for your livestock.
+            </h2>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Link
+                href={buildSignUpHref("/dashboard")}
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-white/15 bg-white px-8 text-base font-semibold text-[#1b1c1c] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              >
+                Try It Now
+              </Link>
+              <Link
+                href="/sign-up?redirectTo=/dashboard"
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 bg-[#2e7d32] px-8 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#256428]"
+              >
+                Create Account
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-4 px-4 py-16 text-center sm:px-0 sm:pt-24">
+          <div className="flex flex-col gap-3">
+            <h2 className="text-3xl font-bold sm:text-4xl">
+              Why Choose PashuGyan?
+            </h2>
+            <p className="mx-auto max-w-3xl text-base leading-7 text-[#40493d]">
+              Quickly identify breeds and get useful insights to manage your
+              livestock better.
+            </p>
           </div>
 
-          <h1 className="mt-6 text-5xl font-bold leading-[1.05] text-[#1b1c1c] md:text-7xl">
-            Namaste, let&apos;s build your
-            <span className="block text-[#2e7d32]">livestock dashboard</span>
-          </h1>
-
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[#40493d]">
-            Start with a simple welcome screen. When you are ready to use the
-            platform, create your farmer account or sign in to open the full
-            dashboard with breed detection, your scan history, and the entire
-            PashuGyan toolkit.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href={buildSignUpHref("/dashboard")}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#2e7d32] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#2e7d32]/20 transition hover:bg-[#256428] active:scale-95"
-            >
-              Get started
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/sign-in?redirectTo=/dashboard"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#bfcaba] bg-white px-6 py-3 text-sm font-semibold text-[#1b1c1c] transition hover:bg-[#f5f3f3]"
-            >
-              Sign in
-            </Link>
-          </div>
-
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {highlights.map((item) => {
-              const Icon = item.icon;
+          <div className="grid grid-cols-1 gap-6 pt-4 sm:grid-cols-3">
+            {featureCards.map((card) => {
+              const Icon = card.icon;
 
               return (
                 <div
-                  key={item.title}
-                  className="rounded-[1.75rem] border border-[#bfcaba] bg-white/90 p-5 shadow-sm backdrop-blur-sm"
+                  key={card.title}
+                  className="flex flex-col items-center gap-4 rounded-xl bg-white p-6 text-center shadow-md transition-all duration-500 hover:scale-[1.03] hover:shadow-xl"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#2e7d32]/10 text-[#2e7d32]">
-                    <Icon className="h-5 w-5" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2e7d32]/15 text-[#2e7d32]">
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <h2 className="mt-4 text-base font-semibold text-[#1b1c1c]">
-                    {item.title}
-                  </h2>
-                  <p className="mt-2 text-sm leading-6 text-[#40493d]">
-                    {item.description}
-                  </p>
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-lg font-bold text-[#1b1c1c]">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm leading-6 text-[#40493d]">
+                      {card.description}
+                    </p>
+                  </div>
                 </div>
               );
             })}
           </div>
         </section>
 
-        <aside className="relative">
-          <div className="absolute -left-6 top-10 hidden h-24 w-24 rounded-full bg-[#2e7d32]/10 blur-2xl lg:block" />
-          <div className="rounded-[2.5rem] border border-[#bfcaba] bg-white/90 p-6 shadow-[0_25px_70px_rgba(27,28,28,.10)] backdrop-blur-sm md:p-8">
-            <div className="rounded-[2rem] bg-gradient-to-br from-[#1b4332] via-[#2e7d32] to-[#4c9f4a] p-8 text-white shadow-[0_20px_50px_rgba(46,125,50,.30)]">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/80">
-                <ShieldCheck className="h-4 w-4" />
-                Secure session
-              </div>
-              <h2 className="mt-4 text-3xl font-bold leading-tight md:text-4xl">
-                Your dashboard opens after login.
-              </h2>
-              <p className="mt-4 max-w-lg text-sm leading-7 text-white/88">
-                Once your account is verified, we route you straight to the main
-                dashboard where all your farm tools are available in one place.
-              </p>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {dashboardItems.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-start gap-3 rounded-2xl border border-white/12 bg-white/10 p-4 backdrop-blur-md"
-                  >
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#cbffc2]" />
-                    <span className="text-sm leading-6 text-white/95">{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap items-center gap-3 rounded-[1.5rem] border border-white/15 bg-white/10 px-4 py-4 backdrop-blur-md">
-                <LayoutDashboard className="h-5 w-5 text-[#cbffc2]" />
-                <div className="text-sm leading-6 text-white/90">
-                  After sign in, you&apos;ll land on <span className="font-semibold">Dashboard</span>, then you can
-                  jump into Detect, Database, and History.
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <div className="rounded-[1.75rem] border border-[#bfcaba] bg-[#fbf9f8] p-5">
-                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[#2e7d32]">
-                  Farmer flow
-                </div>
-                <div className="mt-2 text-lg font-semibold text-[#1b1c1c]">
-                  Register, then sign in
-                </div>
-                <p className="mt-2 text-sm leading-6 text-[#40493d]">
-                  New users create an account first. Returning users go straight
-                  to login.
-                </p>
-              </div>
-
-              <div className="rounded-[1.75rem] border border-[#bfcaba] bg-[#fbf9f8] p-5">
-                <div className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ff8f00]">
-                  Activity gate
-                </div>
-                <div className="mt-2 text-lg font-semibold text-[#1b1c1c]">
-                  Protected tools
-                </div>
-                <p className="mt-2 text-sm leading-6 text-[#40493d]">
-                  Detect and the dashboard stay behind authentication for each
-                  unique farmer.
-                </p>
-              </div>
-            </div>
+        <section className="flex flex-col items-center gap-6 px-4 py-16 text-center sm:pt-20">
+          <div className="flex flex-col gap-2">
+            <h2 className="max-w-3xl text-3xl font-bold sm:text-4xl">
+              Start Identifying Breeds Today
+            </h2>
+            <p className="mx-auto max-w-3xl text-base leading-7 text-[#40493d]">
+              Instantly identify the breed and access complete care, feeding,
+              and milk yield information.
+            </p>
           </div>
-        </aside>
+
+          <div className="grid w-full max-w-5xl gap-4 rounded-[2rem] border border-[#bfcaba] bg-white p-6 shadow-sm sm:grid-cols-3 sm:p-8">
+            {infoCards.map((card) => (
+              <div
+                key={card.title}
+                className="rounded-xl bg-[#fbf9f8] p-5 text-left shadow-sm"
+              >
+                <div className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2e7d32]">
+                  {card.title}
+                </div>
+                <p className="mt-2 text-sm leading-6 text-[#40493d]">
+                  {card.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mx-auto flex w-full max-w-2xl items-center justify-center px-4 py-12">
+          <div className="w-full rounded-2xl border border-[#bfcaba] bg-white p-6 shadow-sm sm:p-8">
+            <h2 className="mb-2 text-2xl font-bold text-[#1b1c1c]">
+              Get in touch
+            </h2>
+            <p className="mb-6 text-sm text-[#40493d]">
+              Have a question or feedback? We&apos;d love to hear from you.
+            </p>
+
+            <form className="space-y-5">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div>
+                  <label
+                    className="mb-1.5 block text-sm font-medium text-[#1b1c1c]"
+                    htmlFor="name"
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    placeholder="John Doe"
+                    className="w-full rounded-lg border border-[#bfcaba] bg-transparent px-4 py-2.5 text-[#1b1c1c] outline-none transition focus:ring-2 focus:ring-[#2e7d32]"
+                  />
+                </div>
+                <div>
+                  <label
+                    className="mb-1.5 block text-sm font-medium text-[#1b1c1c]"
+                    htmlFor="email"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    className="w-full rounded-lg border border-[#bfcaba] bg-transparent px-4 py-2.5 text-[#1b1c1c] outline-none transition focus:ring-2 focus:ring-[#2e7d32]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  className="mb-1.5 block text-sm font-medium text-[#1b1c1c]"
+                  htmlFor="message"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="How can we help?"
+                  className="h-32 w-full resize-none rounded-lg border border-[#bfcaba] bg-transparent px-4 py-3 text-[#1b1c1c] outline-none transition focus:ring-2 focus:ring-[#2e7d32]"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center rounded-lg bg-[#2e7d32] px-8 py-3 font-semibold text-white shadow-sm transition hover:brightness-110"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </section>
       </main>
+
+      <footer className="border-t border-[#bfcaba] bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-4 text-center text-sm text-[#40493d] sm:px-6 md:flex-row md:py-6 md:text-left">
+          <span>
+            Copyright {new Date().getFullYear()}{" "}
+            <Link href="/" className="font-semibold text-[#2e7d32] hover:underline">
+              PashuGyan
+            </Link>
+            . All Rights Reserved.
+          </span>
+          <div className="flex items-center gap-6">
+            <Link href="/terms" className="hover:text-[#2e7d32] hover:underline">
+              Terms &amp; Conditions
+            </Link>
+            <Link href="/privacy-policy" className="hover:text-[#2e7d32] hover:underline">
+              Privacy Policy
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

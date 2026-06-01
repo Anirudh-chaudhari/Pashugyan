@@ -4,9 +4,9 @@ import { HomeLanding } from "@/components/home/home-landing";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
-  title: "PashuGyan | Namaste",
+  title: "Home",
   description:
-    "Start on the PashuGyan welcome page, then create an account or sign in to open your farmer dashboard.",
+    "Start on the PashuGyan welcome page, then try breed detection or sign in to open your farmer dashboard.",
 };
 
 export const dynamic = "force-dynamic";
