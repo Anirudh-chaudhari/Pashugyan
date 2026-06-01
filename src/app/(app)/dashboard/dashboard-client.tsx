@@ -490,7 +490,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
         </div>
       </header>
 
-      <main className="mx-auto flex w-full max-w-[1600px] flex-col px-gutter pb-20 pt-24 md:px-container-margin-desktop">
+      <main className="flex w-full flex-col px-4 pb-20 pt-24 sm:px-6 md:px-8 lg:px-10">
         <section className="animate-fade-in-up mb-12 flex flex-col items-start justify-between gap-stack-md md:flex-row md:items-center">
           <div>
             <h1 className="mb-2 text-4xl font-bold leading-tight text-[#1b1c1c] md:text-5xl font-display">
@@ -781,8 +781,8 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
         </span>
       </Link>
 
-      <footer className="w-full border-t border-[#bfcaba] bg-[#e4e2e1] px-gutter py-16 md:px-container-margin-desktop">
-        <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-between gap-12 md:flex-row md:items-center">
+      <footer className="w-full border-t border-[#bfcaba] bg-[#e4e2e1] px-4 py-16 sm:px-6 md:px-8 lg:px-10">
+        <div className="flex flex-col items-start justify-between gap-12 md:flex-row md:items-center">
           <div className="flex flex-col gap-4">
             <span className="text-[24px] font-bold leading-8 text-[#2e7d32]">
               PashuGyan
