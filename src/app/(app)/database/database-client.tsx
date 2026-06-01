@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { getAnimalFallbackEmoji } from "@/lib/breed-images";
+import { buildSignUpHref } from "@/lib/auth-links";
 import { Breed } from "@/types/breed";
 
 type FilterKey = "all" | "cattle" | "buffalo" | "draft";
@@ -276,7 +277,7 @@ export function DatabaseClient({ breeds, fontClassName }: DatabaseClientProps) {
         </nav>
 
         <Link
-          href="/detect"
+          href={buildSignUpHref()}
           className="rounded-full bg-[#2e7d32] px-6 py-2.5 text-[14px] font-semibold leading-5 text-white transition-all duration-200 hover:shadow-lg active:scale-95"
         >
           Try Now

@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
+import { buildSignUpHref } from "@/lib/auth-links";
 
 const navLinks = [
   { href: "/detect", label: "Detect" },
@@ -159,7 +160,7 @@ export function WhatWeProvideClient({
         </nav>
 
         <Link
-          href="/detect"
+          href={buildSignUpHref()}
           className="rounded-full bg-[#2e7d32] px-6 py-2 text-[14px] font-bold leading-5 text-white transition-all hover:opacity-90 active:scale-95"
         >
           Try Now
@@ -358,7 +359,7 @@ export function WhatWeProvideClient({
           </h2>
           <div className="flex flex-col justify-center gap-6 sm:flex-row">
             <Link
-              href="/detect"
+              href={buildSignUpHref()}
               className="rounded-full bg-[#2e7d32] px-12 py-5 text-[14px] font-bold leading-5 text-white shadow-xl shadow-[#2e7d32]/20 transition-all hover:-translate-y-1"
             >
               Start a Free Scan

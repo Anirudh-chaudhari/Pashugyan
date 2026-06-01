@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import breedsData from "@/data/breeds.json";
 import { PhotoWithFallback } from "@/components/shared/photo-with-fallback";
+import { buildSignUpHref } from "@/lib/auth-links";
 import { useSupabaseAuth } from "@/components/auth/supabase-auth-provider";
 import { useFarmerHistory } from "@/hooks/useFarmerHistory";
 import { getBreedImage } from "@/lib/breed-images";
@@ -472,7 +473,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
           </Link>
           <Link
             className="rounded-xl bg-[#2e7d32] px-6 py-2 text-[14px] font-semibold leading-5 text-white shadow-lg shadow-[#2e7d32]/20 transition-all active:scale-95"
-            href="/detect"
+            href={buildSignUpHref()}
           >
             Try Now
           </Link>

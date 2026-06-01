@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Leaf } from "lucide-react";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Button } from "@/components/ui/button";
+import { buildSignUpHref } from "@/lib/auth-links";
 import { cn } from "@/lib/utils";
 import { useAppStore } from "@/stores/useAppStore";
 
@@ -79,7 +80,7 @@ export function Navbar() {
             {language === "en" ? "EN / HI" : "HI / EN"}
           </button>
           <Button asChild variant="amber">
-            <Link href="/detect">Start Free</Link>
+            <Link href={buildSignUpHref()}>Start Free</Link>
           </Button>
         </div>
 

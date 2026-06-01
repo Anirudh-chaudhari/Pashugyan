@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { buildSignUpHref } from "@/lib/auth-links";
 import { useAppStore } from "@/stores/useAppStore";
 
 type MobileNavProps = {
@@ -53,7 +54,7 @@ export function MobileNav({ links }: MobileNavProps) {
               {language === "en" ? "EN / HI" : "HI / EN"}
             </Button>
             <Button asChild variant="amber" className="flex-1" onClick={() => setMobileNavOpen(false)}>
-              <Link href="/detect">Start Free</Link>
+              <Link href={buildSignUpHref()}>Start Free</Link>
             </Button>
           </div>
         </DialogContent>
