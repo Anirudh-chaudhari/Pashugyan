@@ -3,6 +3,7 @@
 import type { PropsWithChildren } from "react";
 import { usePathname } from "next/navigation";
 import { AppSidebar } from "@/components/layout/app-sidebar";
+import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
 import { Navbar } from "@/components/layout/navbar";
 
 const standaloneRoutes = new Set(["/dashboard", "/database", "/detect"]);
@@ -11,7 +12,12 @@ export function AppShell({ children }: PropsWithChildren) {
   const pathname = usePathname();
 
   if (standaloneRoutes.has(pathname)) {
-    return <div className="min-h-screen bg-background">{children}</div>;
+    return (
+      <div className="min-h-screen bg-background pb-28 md:pb-0">
+        {children}
+        <MobileBottomNav />
+      </div>
+    );
   }
 
   return (

@@ -768,7 +768,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
 
       <Link
         aria-label="Start New Scan"
-        className="group fixed bottom-8 right-8 z-40 flex h-20 w-20 items-center justify-center rounded-full bg-[#2e7d32] text-white shadow-2xl transition-all hover:scale-110 active:scale-95"
+        className="group fixed bottom-24 right-4 z-40 flex h-20 w-20 items-center justify-center rounded-full bg-[#2e7d32] text-white shadow-2xl transition-all hover:scale-110 active:scale-95 md:bottom-8 md:right-8"
         href="/detect"
       >
         <MaterialIcon
