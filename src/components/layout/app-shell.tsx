@@ -13,7 +13,7 @@ export function AppShell({ children }: PropsWithChildren) {
 
   if (standaloneRoutes.has(pathname)) {
     return (
-      <div className="min-h-screen bg-background pb-28 md:pb-0">
+      <div className="min-h-screen bg-background pb-32 md:pb-0">
         {children}
         <MobileBottomNav />
       </div>

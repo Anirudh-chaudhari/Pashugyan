@@ -609,7 +609,7 @@ export function DetectClient({ fontClassName }: DetectClientProps) {
       </main>
 
       <button
-        className="fixed bottom-24 right-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-[#2e7d32] text-white shadow-2xl transition-all hover:scale-105 active:scale-95 md:hidden"
+        className="fixed bottom-28 right-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-[#2e7d32] text-white shadow-2xl transition-all hover:scale-105 active:scale-95 md:hidden"
         onClick={() => inputRef.current?.click()}
         type="button"
       >

@@ -485,7 +485,7 @@ export function DatabaseClient({ breeds, fontClassName }: DatabaseClientProps) {
 
       <Link
         aria-label="Start a quick scan"
-        className="fixed bottom-24 right-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-[#2e7d32] text-white shadow-2xl transition-transform active:scale-90 md:hidden"
+        className="fixed bottom-28 right-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-[#2e7d32] text-white shadow-2xl transition-transform active:scale-90 md:hidden"
         href="/detect"
       >
         <span
