@@ -1,12 +1,11 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import breedsData from "@/data/breeds.json";
 import { PhotoWithFallback } from "@/components/shared/photo-with-fallback";
-import { buildSignUpHref } from "@/lib/auth-links";
 import { useSupabaseAuth } from "@/components/auth/supabase-auth-provider";
 import { useFarmerHistory } from "@/hooks/useFarmerHistory";
 import { getBreedImage } from "@/lib/breed-images";
@@ -33,7 +32,7 @@ type HistoryCard = {
 
 const breedCatalog = breedsData as Breed[];
 
-const historyFallbackCards: HistoryCard[] = [
+const fallbackHistoryCards: HistoryCard[] = [
   {
     badge: "98% High",
     badgeTone: "high",
@@ -81,14 +80,6 @@ function MaterialIcon({
 
 function normalizeKey(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
-}
-
-function slugifyBreed(value: string) {
-  return value
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
 }
 
 function findBreedByName(name: string) {
@@ -141,13 +132,13 @@ function formatRelativeTime(dateString: string) {
 
 function formatMemberSince(dateString: string | undefined) {
   if (!dateString) {
-    return "Guest mode";
+    return "Member since Feb 2023";
   }
 
   const date = new Date(dateString);
 
   if (Number.isNaN(date.getTime())) {
-    return "Member";
+    return "Member since Feb 2023";
   }
 
   return `Member since ${new Intl.DateTimeFormat("en-US", {
@@ -208,8 +199,7 @@ function getConfidenceTone(confidence: number) {
 function getConfidenceLabel(confidence: number) {
   const percent = Math.round(confidence * 100);
   const tone = getConfidenceTone(confidence);
-  const label =
-    tone === "high" ? "High" : tone === "medium" ? "Medium" : "Low";
+  const label = tone === "high" ? "High" : tone === "medium" ? "Medium" : "Low";
 
   return {
     label: `${percent}% ${label}`,
@@ -225,9 +215,31 @@ function fallbackHistoryImage(animalType: "buffalo" | "cattle" | "unknown") {
   return "/images/stitch/dashboard-history-gir.jpg";
 }
 
+function slugifyBreed(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function getRecentMeta(
+  latestScan: ScanHistoryItem | null,
+  latestBreed: Breed | null,
+) {
+  if (!latestScan) {
+    return "2 hours ago • Gujarat";
+  }
+
+  const location =
+    latestBreed?.originState ??
+    (latestScan.result.animalType === "buffalo" ? "Buffalo" : "Cattle");
+
+  return `${formatRelativeTime(latestScan.createdAt)} • ${location}`;
+}
+
 export function DashboardClient({ fontClassName }: DashboardClientProps) {
-  const router = useRouter();
-  const { signOut, user } = useSupabaseAuth();
+  const { user } = useSupabaseAuth();
   const { history } = useFarmerHistory();
   const [hasMounted, setHasMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -262,26 +274,29 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
       },
     );
 
-    const elements = document.querySelectorAll(".dashboard-reveal");
-    elements.forEach((element) => observer.observe(element));
+    const animateElements = document.querySelectorAll(".dashboard-reveal");
+    animateElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
 
-  const liveHistory = useMemo(
-    () => (hasMounted ? history : []),
-    [hasMounted, history],
-  );
+  const liveHistory = useMemo(() => (hasMounted ? history : []), [hasMounted, history]);
   const isAuthenticated = Boolean(user);
   const latestScan = liveHistory[0] ?? null;
   const latestBreed = latestScan ? findBreedByName(latestScan.result.breed) : null;
   const monthlyDelta = useMemo(() => getMonthlyDelta(liveHistory), [liveHistory]);
-  const greetingName = isAuthenticated ? getUserDisplayName(user) : "Rajesh Ji";
-  const avatarLabel = getUserInitials(greetingName);
+
+  const profileName = isAuthenticated
+    ? getUserDisplayName(user) || "Rajesh Kumar"
+    : "Rajesh Kumar";
+  const greetingName = isAuthenticated
+    ? `${profileName.split(" ")[0] ?? profileName} Ji`
+    : "Rajesh Ji";
+  const avatarLabel = getUserInitials(profileName);
   const profileAvatarUrl = isAuthenticated ? getUserAvatarUrl(user) : null;
   const memberSinceLabel = isAuthenticated
     ? formatMemberSince(user?.created_at)
-    : "Sign in to sync every scan";
+    : "Member since Feb 2023";
 
   const totalAnimalsDisplay = liveHistory.length > 0 ? liveHistory.length : 24;
   const totalAnimalsLabel =
@@ -296,14 +311,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
   const recentTitle = latestScan
     ? `${latestScan.result.breed} Scan`
     : "Gir Cow Scan";
-  const recentMeta = latestScan
-    ? `${formatRelativeTime(latestScan.createdAt)} | ${
-        latestBreed?.originState ??
-        (latestScan.result.animalType === "buffalo"
-          ? "Buffalo"
-          : "Cattle")
-      }`
-    : "2 hours ago | Gujarat";
+  const recentMeta = getRecentMeta(latestScan, latestBreed);
   const recentConfidence = latestScan
     ? `${Math.round(latestScan.result.confidence * 100)}% Confidence`
     : "94% Confidence";
@@ -331,7 +339,9 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
             ? "Increase water access and cooling support during hot afternoons."
             : "Add more dry fodder and mineral support during the current season.",
         icon: "nutrition",
-        title: `Seasonal feeding tips for your ${latestBreed.name}`,
+        title: `Seasonal feeding tips for your ${latestBreed.name}${
+          latestBreed.type === "buffalo" ? "" : " cow"
+        }`,
       },
       {
         description: "Scheduled FMD booster for next Tuesday.",
@@ -343,7 +353,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
 
   const historyCards = useMemo<HistoryCard[]>(() => {
     if (liveHistory.length === 0) {
-      return historyFallbackCards;
+      return fallbackHistoryCards;
     }
 
     const cards = liveHistory.slice(0, 3).map((item) => {
@@ -367,7 +377,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
       return cards;
     }
 
-    return [...cards, ...historyFallbackCards.slice(cards.length)].slice(0, 3);
+    return [...cards, ...fallbackHistoryCards.slice(cards.length)].slice(0, 3);
   }, [liveHistory]);
 
   return (
@@ -424,10 +434,10 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
       `}</style>
 
       <header
-        className={`fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b border-[#bfcaba] px-4 transition-all duration-300 md:px-8 ${
+        className={`fixed left-0 top-0 z-50 flex w-full items-center justify-between border-b border-[#bfcaba] px-gutter md:px-container-margin-desktop py-4 transition-all duration-300 ${
           scrolled
             ? "scrolled-header py-2"
-            : "bg-[#fbf9f8]/80 py-4 backdrop-blur-md"
+            : "bg-[#fbf9f8]/80 backdrop-blur-md"
         }`}
         id="top-nav"
       >
@@ -439,51 +449,51 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
 
         <nav className="hidden items-center gap-8 md:flex">
           <Link
-            className="border-b-2 border-[#2e7d32] pb-1 text-[14px] font-medium leading-5 text-[#2e7d32]"
+            className="border-b-2 border-[#2e7d32] pb-1 text-[14px] font-medium leading-5 text-[#2e7d32] transition-colors font-display"
             href="/detect"
           >
             Detect
           </Link>
           <Link
-            className="text-[14px] font-medium leading-5 text-[#40493d] transition-colors hover:text-[#2e7d32]"
+            className="text-[14px] font-medium leading-5 text-[#40493d] transition-colors hover:text-[#2e7d32] font-display"
             href="/database"
           >
             Database
           </Link>
           <Link
-            className="text-[14px] font-medium leading-5 text-[#40493d] transition-colors hover:text-[#2e7d32]"
+            className="text-[14px] font-medium leading-5 text-[#40493d] transition-colors hover:text-[#2e7d32] font-display"
             href="/how-it-works"
           >
             How It Works
           </Link>
           <Link
-            className="text-[14px] font-medium leading-5 text-[#40493d] transition-colors hover:text-[#2e7d32]"
+            className="text-[14px] font-medium leading-5 text-[#40493d] transition-colors hover:text-[#2e7d32] font-display"
             href="/help-guide"
           >
             Help
           </Link>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-stack-sm">
           <Link
-            className="hidden rounded-xl border-2 border-[#2e7d32] px-6 py-2 text-[14px] font-semibold leading-5 text-[#2e7d32] transition-all hover:bg-[#2e7d32]/5 md:block"
+            className="hidden rounded-xl border-2 border-[#2e7d32] px-6 py-2 text-[14px] font-semibold leading-5 text-[#2e7d32] transition-all hover:bg-[#2e7d32]/5 md:block font-display"
             href="/database"
           >
             Browse Breeds
           </Link>
           <Link
-            className="rounded-xl bg-[#2e7d32] px-6 py-2 text-[14px] font-semibold leading-5 text-white shadow-lg shadow-[#2e7d32]/20 transition-all active:scale-95"
-            href={buildSignUpHref()}
+            className="rounded-xl bg-[#2e7d32] px-6 py-2 text-[14px] font-semibold leading-5 text-white shadow-lg shadow-[#2e7d32]/20 transition-all active:scale-95 font-display"
+            href="/detect"
           >
             Try Now
           </Link>
         </div>
       </header>
 
-      <main className="mx-auto flex w-full max-w-[1600px] flex-col px-4 pb-20 pt-24 md:px-8">
-        <section className="mb-12 flex flex-col items-start justify-between gap-4 animate-fade-in-up md:flex-row md:items-center">
+      <main className="mx-auto flex w-full max-w-[1600px] flex-col px-gutter pb-20 pt-24 md:px-container-margin-desktop">
+        <section className="animate-fade-in-up mb-12 flex flex-col items-start justify-between gap-stack-md md:flex-row md:items-center">
           <div>
-            <h1 className="mb-2 text-4xl font-bold leading-tight text-[#1b1c1c] md:text-5xl">
+            <h1 className="mb-2 text-4xl font-bold leading-tight text-[#1b1c1c] md:text-5xl font-display">
               Namaste, {greetingName}
             </h1>
             <p className="text-[18px] leading-7 text-[#40493d]">
@@ -495,54 +505,17 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
             <PhotoWithFallback
               alt="Profile"
               className="h-16 w-16 rounded-full border-4 border-[#f0eded] shadow-sm"
-              emojiClassName="text-2xl font-bold tracking-[0.08em] text-white"
+              emojiClassName="text-xl font-bold tracking-[0.08em] text-white"
               fallbackEmoji={avatarLabel}
               src={profileAvatarUrl}
             />
             <div className="flex flex-col">
               <span className="text-[20px] font-semibold leading-7 text-[#1b1c1c]">
-                {greetingName}
+                {profileName}
               </span>
               <span className="text-[12px] font-medium uppercase tracking-[0.18em] text-[#40493d]">
                 {memberSinceLabel}
               </span>
-              <div className="mt-3 flex flex-wrap gap-3">
-                {isAuthenticated ? (
-                  <button
-                    className="rounded-full border border-[#2e7d32]/25 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#2e7d32] transition hover:bg-[#2e7d32]/5"
-                    onClick={async () => {
-                      const { error } = await signOut();
-
-                      if (error) {
-                        toast.error(error);
-                        return;
-                      }
-
-                      toast.success("Signed out successfully.");
-                      router.push("/sign-in");
-                      router.refresh();
-                    }}
-                    type="button"
-                  >
-                    Sign Out
-                  </button>
-                ) : (
-                  <>
-                    <Link
-                      className="rounded-full bg-[#2e7d32] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:opacity-90"
-                      href="/sign-in"
-                    >
-                      Sign In
-                    </Link>
-                    <Link
-                      className="rounded-full border border-[#2e7d32]/25 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#2e7d32] transition hover:bg-[#2e7d32]/5"
-                      href="/sign-up"
-                    >
-                      Register
-                    </Link>
-                  </>
-                )}
-              </div>
             </div>
           </div>
         </section>
@@ -602,10 +575,10 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
             </div>
 
             <section
-              className="dashboard-reveal rounded-[2.5rem] border border-[#2e7d32]/10 bg-[#2e7d32]/[0.03] p-8 opacity-0 sm:col-span-2"
+              className="dashboard-reveal sm:col-span-2 rounded-[2.5rem] border border-[#2e7d32]/10 bg-[#2e7d32]/[0.03] p-8 opacity-0"
               style={{ animationDelay: "300ms" }}
             >
-              <h2 className="-ml-4 mb-8 flex items-center gap-3 rounded-xl bg-[#2e7d32]/10 p-4 text-[20px] font-semibold leading-7 text-[#2e7d32]">
+              <h2 className="-ml-4 mb-8 flex items-center gap-3 rounded-xl bg-[#2e7d32]/10 p-4 text-[20px] font-semibold leading-7 text-[#2e7d32] font-display">
                 <MaterialIcon name="grass" />
                 Recommended Actions
               </h2>
@@ -616,10 +589,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
                     className="rounded-2xl border border-[#2e7d32]/5 bg-white/60 p-6 backdrop-blur-sm transition-all hover:border-[#2e7d32]/20"
                   >
                     <div className="flex items-start gap-4">
-                      <MaterialIcon
-                        className="mt-1 text-[#2e7d32]"
-                        name={action.icon}
-                      />
+                      <MaterialIcon className="mt-1 text-[#2e7d32]" name={action.icon} />
                       <div>
                         <p className="mb-1 font-bold text-[#1b1c1c]">
                           {action.title}
@@ -640,13 +610,13 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
               className="dashboard-reveal rounded-[2.5rem] border border-[#bfcaba] bg-white p-8 opacity-0 shadow-sm"
               style={{ animationDelay: "400ms" }}
             >
-              <h3 className="-ml-4 mb-6 flex items-center gap-3 rounded-xl bg-[#2e7d32]/10 p-4 text-[20px] font-semibold leading-7 text-[#2e7d32]">
+              <h3 className="-ml-4 mb-6 flex items-center gap-3 rounded-xl bg-[#2e7d32]/10 p-4 text-[20px] font-semibold leading-7 text-[#2e7d32] font-display">
                 <MaterialIcon name="explore" />
                 Quick Navigation
               </h3>
               <div className="space-y-3">
                 <Link
-                  className="group flex w-full items-center justify-between rounded-2xl border border-transparent bg-[#fbf9f8] p-4 text-[#1b1c1c] transition-all hover:border-[#bfcaba] hover:bg-white"
+                  className="group flex w-full items-center justify-between rounded-2xl border border-transparent bg-[#fbf9f8] p-4 text-[#1b1c1c] transition-all hover:border-[#bfcaba] hover:bg-white font-display"
                   href="/database"
                 >
                   <div className="flex items-center gap-4">
@@ -662,7 +632,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
                 </Link>
 
                 <Link
-                  className="group flex w-full items-center justify-between rounded-2xl border border-transparent bg-[#fbf9f8] p-4 text-[#1b1c1c] transition-all hover:border-[#bfcaba] hover:bg-white"
+                  className="group flex w-full items-center justify-between rounded-2xl border border-transparent bg-[#fbf9f8] p-4 text-[#1b1c1c] transition-all hover:border-[#bfcaba] hover:bg-white font-display"
                   href="/help-guide"
                 >
                   <div className="flex items-center gap-4">
@@ -681,7 +651,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
                 </Link>
 
                 <Link
-                  className="group flex w-full items-center justify-between rounded-2xl border border-transparent bg-[#fbf9f8] p-4 text-[#1b1c1c] transition-all hover:border-[#bfcaba] hover:bg-white"
+                  className="group flex w-full items-center justify-between rounded-2xl border border-transparent bg-[#fbf9f8] p-4 text-[#1b1c1c] transition-all hover:border-[#bfcaba] hover:bg-white font-display"
                   href="/dashboard#history"
                 >
                   <div className="flex items-center gap-4">
@@ -731,12 +701,12 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
             style={{ animationDelay: "600ms" }}
           >
             <div className="mb-8 flex items-center justify-between border-b-4 border-[#2e7d32]/10 pb-4">
-              <h2 className="flex items-center gap-3 text-[32px] font-bold leading-10 text-[#1b1c1c]">
+              <h2 className="flex items-center gap-3 text-[32px] font-bold leading-10 text-[#1b1c1c] font-display">
                 <span className="h-1 w-8 rounded-full bg-[#2e7d32]" />
                 Identification History
               </h2>
               <Link
-                className="group flex items-center gap-2 font-bold text-[#2e7d32] transition-transform hover:translate-x-2"
+                className="group flex items-center gap-2 font-bold text-[#2e7d32] transition-transform hover:translate-x-2 font-display"
                 href="/dashboard#history"
               >
                 View All
@@ -755,7 +725,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
                     <PhotoWithFallback
                       alt={item.title}
                       className="h-full w-full"
-                      fallbackEmoji="COW"
+                      fallbackEmoji="CW"
                       imgClassName="transition-transform duration-700 group-hover:scale-110"
                       src={item.image}
                     />
@@ -811,7 +781,7 @@ export function DashboardClient({ fontClassName }: DashboardClientProps) {
         </span>
       </Link>
 
-      <footer className="w-full border-t border-[#bfcaba] bg-[#e4e2e1] px-4 py-16 md:px-8">
+      <footer className="w-full border-t border-[#bfcaba] bg-[#e4e2e1] px-gutter py-16 md:px-container-margin-desktop">
         <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-between gap-12 md:flex-row md:items-center">
           <div className="flex flex-col gap-4">
             <span className="text-[24px] font-bold leading-8 text-[#2e7d32]">
