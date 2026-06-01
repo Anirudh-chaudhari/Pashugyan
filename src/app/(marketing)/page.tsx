@@ -1,18 +1,28 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { DashboardClient } from "@/app/(app)/dashboard/dashboard-client";
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
+import { redirect } from "next/navigation";
+import { HomeLanding } from "@/components/home/home-landing";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
-  title: "PashuGyan | Farmer Dashboard",
+  title: "PashuGyan | Namaste",
   description:
-    "Start with the PashuGyan dashboard, see your latest scan activity, and jump into livestock tools from the first screen.",
+    "Start on the PashuGyan welcome page, then create an account or sign in to open your farmer dashboard.",
 };
 
-export default function HomePage() {
-  return <DashboardClient fontClassName={inter.className} />;
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const supabase = await createSupabaseServerClient();
+
+  if (supabase) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      redirect("/dashboard");
+    }
+  }
+
+  return <HomeLanding />;
 }
